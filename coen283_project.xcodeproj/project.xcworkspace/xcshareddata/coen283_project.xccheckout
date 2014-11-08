@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>DDC3BE7A-75ED-4036-BC76-B7862C0E118D</string>
+	<key>IDESourceControlProjectName</key>
+	<string>coen283_project</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>0F9EEC6FACEC3D584E99A570BF4D75103CB3AFB9</key>
+		<string>https://github.com/bzhong/coen283_project.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>coen283_project.xcodeproj</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>0F9EEC6FACEC3D584E99A570BF4D75103CB3AFB9</key>
+		<string>../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/bzhong/coen283_project.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>0F9EEC6FACEC3D584E99A570BF4D75103CB3AFB9</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>0F9EEC6FACEC3D584E99A570BF4D75103CB3AFB9</string>
+			<key>IDESourceControlWCCName</key>
+			<string>coen283_project</string>
+		</dict>
+	</array>
+</dict>
+</plist>
