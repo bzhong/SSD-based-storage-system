@@ -57,33 +57,12 @@
 		C90A5A391A0E000100E0A8B5 /* coen283_project */ = {
 			isa = PBXGroup;
 			children = (
+				C90A5A4D1A0E05E100E0A8B5 /* disk */,
+				C90A5A4C1A0E05DB00E0A8B5 /* algorithm */,
+				C90A5A4B1A0E05CB00E0A8B5 /* input_generator */,
 				C90A5A481A0E04BC00E0A8B5 /* driver */,
-				C90A5A441A0E021F00E0A8B5 /* disk */,
-				C90A5A431A0E021800E0A8B5 /* algorithm */,
-				C90A5A421A0E020500E0A8B5 /* input_generator */,
 			);
 			path = coen283_project;
-			sourceTree = "<group>";
-		};
-		C90A5A421A0E020500E0A8B5 /* input_generator */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = input_generator;
-			sourceTree = "<group>";
-		};
-		C90A5A431A0E021800E0A8B5 /* algorithm */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = algorithm;
-			sourceTree = "<group>";
-		};
-		C90A5A441A0E021F00E0A8B5 /* disk */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = disk;
 			sourceTree = "<group>";
 		};
 		C90A5A481A0E04BC00E0A8B5 /* driver */ = {
@@ -92,6 +71,27 @@
 				C90A5A491A0E04E100E0A8B5 /* main.cpp */,
 			);
 			path = driver;
+			sourceTree = SOURCE_ROOT;
+		};
+		C90A5A4B1A0E05CB00E0A8B5 /* input_generator */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = input_generator;
+			sourceTree = SOURCE_ROOT;
+		};
+		C90A5A4C1A0E05DB00E0A8B5 /* algorithm */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = algorithm;
+			sourceTree = SOURCE_ROOT;
+		};
+		C90A5A4D1A0E05E100E0A8B5 /* disk */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = disk;
 			sourceTree = SOURCE_ROOT;
 		};
 /* End PBXGroup section */
@@ -264,6 +264,7 @@
 				C90A5A401A0E000100E0A8B5 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
