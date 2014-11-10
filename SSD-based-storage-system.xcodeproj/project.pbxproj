@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		C90A5A4A1A0E04E100E0A8B5 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C90A5A491A0E04E100E0A8B5 /* main.cpp */; };
 		C90A5A4F1A0E064700E0A8B5 /* input_generator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C90A5A4E1A0E064700E0A8B5 /* input_generator.cpp */; };
-		C90A5A521A0E066000E0A8B5 /* FIFO.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C90A5A501A0E066000E0A8B5 /* FIFO.cpp */; };
+		C90A5A521A0E066000E0A8B5 /* replacement_algo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C90A5A501A0E066000E0A8B5 /* replacement_algo.cpp */; };
 		C90A5A551A0E067800E0A8B5 /* disk.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C90A5A531A0E067800E0A8B5 /* disk.cpp */; };
 /* End PBXBuildFile section */
 
@@ -29,8 +29,8 @@
 		C90A5A371A0E000100E0A8B5 /* SSD-based-storage-system */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "SSD-based-storage-system"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C90A5A491A0E04E100E0A8B5 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		C90A5A4E1A0E064700E0A8B5 /* input_generator.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = input_generator.cpp; sourceTree = "<group>"; };
-		C90A5A501A0E066000E0A8B5 /* FIFO.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FIFO.cpp; sourceTree = "<group>"; };
-		C90A5A511A0E066000E0A8B5 /* FIFO.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FIFO.h; sourceTree = "<group>"; };
+		C90A5A501A0E066000E0A8B5 /* replacement_algo.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = replacement_algo.cpp; sourceTree = "<group>"; };
+		C90A5A511A0E066000E0A8B5 /* replacement_algo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = replacement_algo.h; sourceTree = "<group>"; };
 		C90A5A531A0E067800E0A8B5 /* disk.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = disk.cpp; sourceTree = "<group>"; };
 		C90A5A541A0E067800E0A8B5 /* disk.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = disk.h; sourceTree = "<group>"; };
 		C9682A0F1A0F3FA200630CD0 /* input_generator.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = input_generator.h; sourceTree = "<group>"; };
@@ -97,8 +97,8 @@
 		C90A5A4C1A0E05DB00E0A8B5 /* algorithm */ = {
 			isa = PBXGroup;
 			children = (
-				C90A5A501A0E066000E0A8B5 /* FIFO.cpp */,
-				C90A5A511A0E066000E0A8B5 /* FIFO.h */,
+				C90A5A501A0E066000E0A8B5 /* replacement_algo.cpp */,
+				C90A5A511A0E066000E0A8B5 /* replacement_algo.h */,
 			);
 			path = algorithm;
 			sourceTree = SOURCE_ROOT;
@@ -176,7 +176,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C90A5A521A0E066000E0A8B5 /* FIFO.cpp in Sources */,
+				C90A5A521A0E066000E0A8B5 /* replacement_algo.cpp in Sources */,
 				C90A5A4F1A0E064700E0A8B5 /* input_generator.cpp in Sources */,
 				C90A5A551A0E067800E0A8B5 /* disk.cpp in Sources */,
 				C90A5A4A1A0E04E100E0A8B5 /* main.cpp in Sources */,

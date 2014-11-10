@@ -10,6 +10,8 @@
 #define SSD_based_storage_system_op_structure_h
 
 #include <string>
+#include <iostream>
+#include <ctime>
 using namespace std;
 
 typedef unsigned long long BigUInt;
@@ -28,6 +30,13 @@ enum FileType {
     kPicture = 1,
     kAudio = 2,
     kVideo = 3,
+};
+
+enum ReplacementAlgoType {
+    kFIFO = 0,
+    kLRU = 1,
+    kRR = 2,
+    kOptimizedAlgo = 3,
 };
 
 

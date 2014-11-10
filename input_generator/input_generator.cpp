@@ -64,7 +64,7 @@ string InputGenerator::RandomFileName() {
 }
 
 BigUInt InputGenerator::RandomFileSize(BigUInt min_size, BigUInt max_size) {
-    return rand() % (max_size - min_size) + min_size;
+    return min_size == max_size? min_size : (rand() % (max_size - min_size) + min_size);
 }
 
 BigUInt InputGenerator::GetCurrentTime() {
@@ -76,7 +76,7 @@ BigUInt InputGenerator::GetCurrentTime() {
 void InputGenerator::GenBatchOp() {
     vector<FileOp> batch_op;
     for (int command_num = 0; command_num < commands_.size(); ++command_num) {
-        op_ptr foperation;
+        //op_ptr foperation;
         //foperation = &InputGenerator::GenReadOp;
         for (int file_num = 0; file_num < commands_[command_num].file_number; ++file_num) {
             BigUInt file_min = commands_[command_num].file_size_min;
