@@ -6,4 +6,4 @@
 //  Copyright (c) 2014 Qianqian Zhong. All rights reserved.
 //
 
-#include "ssd.h"
+#include "disk.h"

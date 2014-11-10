@@ -2,6 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "self:coen283_project.xcodeproj">
+      location = "self:SSD-based-storage-system.xcodeproj">
    </FileRef>
 </Workspace>

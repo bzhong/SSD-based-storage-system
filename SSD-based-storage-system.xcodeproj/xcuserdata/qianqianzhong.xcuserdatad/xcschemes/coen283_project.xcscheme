@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "C90A5A361A0E000100E0A8B5"
-               BuildableName = "coen283_project"
-               BlueprintName = "coen283_project"
-               ReferencedContainer = "container:coen283_project.xcodeproj">
+               BuildableName = "SSD-based-storage-system"
+               BlueprintName = "SSD-based-storage-system"
+               ReferencedContainer = "container:SSD-based-storage-system.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -33,9 +33,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "C90A5A361A0E000100E0A8B5"
-            BuildableName = "coen283_project"
-            BlueprintName = "coen283_project"
-            ReferencedContainer = "container:coen283_project.xcodeproj">
+            BuildableName = "SSD-based-storage-system"
+            BlueprintName = "SSD-based-storage-system"
+            ReferencedContainer = "container:SSD-based-storage-system.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
    </TestAction>
@@ -52,9 +52,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "C90A5A361A0E000100E0A8B5"
-            BuildableName = "coen283_project"
-            BlueprintName = "coen283_project"
-            ReferencedContainer = "container:coen283_project.xcodeproj">
+            BuildableName = "SSD-based-storage-system"
+            BlueprintName = "SSD-based-storage-system"
+            ReferencedContainer = "container:SSD-based-storage-system.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <AdditionalOptions>
@@ -70,9 +70,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "C90A5A361A0E000100E0A8B5"
-            BuildableName = "coen283_project"
-            BlueprintName = "coen283_project"
-            ReferencedContainer = "container:coen283_project.xcodeproj">
+            BuildableName = "SSD-based-storage-system"
+            BlueprintName = "SSD-based-storage-system"
+            ReferencedContainer = "container:SSD-based-storage-system.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

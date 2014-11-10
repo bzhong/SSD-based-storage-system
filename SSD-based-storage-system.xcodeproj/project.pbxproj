@@ -10,7 +10,7 @@
 		C90A5A4A1A0E04E100E0A8B5 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C90A5A491A0E04E100E0A8B5 /* main.cpp */; };
 		C90A5A4F1A0E064700E0A8B5 /* input_generator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C90A5A4E1A0E064700E0A8B5 /* input_generator.cpp */; };
 		C90A5A521A0E066000E0A8B5 /* FIFO.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C90A5A501A0E066000E0A8B5 /* FIFO.cpp */; };
-		C90A5A551A0E067800E0A8B5 /* ssd.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C90A5A531A0E067800E0A8B5 /* ssd.cpp */; };
+		C90A5A551A0E067800E0A8B5 /* disk.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C90A5A531A0E067800E0A8B5 /* disk.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -26,13 +26,15 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		C90A5A371A0E000100E0A8B5 /* coen283_project */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = coen283_project; sourceTree = BUILT_PRODUCTS_DIR; };
+		C90A5A371A0E000100E0A8B5 /* SSD-based-storage-system */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "SSD-based-storage-system"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C90A5A491A0E04E100E0A8B5 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		C90A5A4E1A0E064700E0A8B5 /* input_generator.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = input_generator.cpp; sourceTree = "<group>"; };
 		C90A5A501A0E066000E0A8B5 /* FIFO.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FIFO.cpp; sourceTree = "<group>"; };
 		C90A5A511A0E066000E0A8B5 /* FIFO.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FIFO.h; sourceTree = "<group>"; };
-		C90A5A531A0E067800E0A8B5 /* ssd.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ssd.cpp; sourceTree = "<group>"; };
-		C90A5A541A0E067800E0A8B5 /* ssd.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ssd.h; sourceTree = "<group>"; };
+		C90A5A531A0E067800E0A8B5 /* disk.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = disk.cpp; sourceTree = "<group>"; };
+		C90A5A541A0E067800E0A8B5 /* disk.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = disk.h; sourceTree = "<group>"; };
+		C9682A0F1A0F3FA200630CD0 /* input_generator.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = input_generator.h; sourceTree = "<group>"; };
+		C9682A111A10142800630CD0 /* op_structure.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = op_structure.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -49,7 +51,7 @@
 		C90A5A2E1A0E000100E0A8B5 = {
 			isa = PBXGroup;
 			children = (
-				C90A5A391A0E000100E0A8B5 /* coen283_project */,
+				C90A5A391A0E000100E0A8B5 /* SSD-based-storage-system */,
 				C90A5A381A0E000100E0A8B5 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -57,19 +59,21 @@
 		C90A5A381A0E000100E0A8B5 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				C90A5A371A0E000100E0A8B5 /* coen283_project */,
+				C90A5A371A0E000100E0A8B5 /* SSD-based-storage-system */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		C90A5A391A0E000100E0A8B5 /* coen283_project */ = {
+		C90A5A391A0E000100E0A8B5 /* SSD-based-storage-system */ = {
 			isa = PBXGroup;
 			children = (
+				C9682A101A1013FB00630CD0 /* common */,
 				C90A5A4D1A0E05E100E0A8B5 /* disk */,
 				C90A5A4C1A0E05DB00E0A8B5 /* algorithm */,
 				C90A5A4B1A0E05CB00E0A8B5 /* input_generator */,
 				C90A5A481A0E04BC00E0A8B5 /* driver */,
 			);
+			name = "SSD-based-storage-system";
 			path = coen283_project;
 			sourceTree = "<group>";
 		};
@@ -85,6 +89,7 @@
 			isa = PBXGroup;
 			children = (
 				C90A5A4E1A0E064700E0A8B5 /* input_generator.cpp */,
+				C9682A0F1A0F3FA200630CD0 /* input_generator.h */,
 			);
 			path = input_generator;
 			sourceTree = SOURCE_ROOT;
@@ -101,18 +106,26 @@
 		C90A5A4D1A0E05E100E0A8B5 /* disk */ = {
 			isa = PBXGroup;
 			children = (
-				C90A5A531A0E067800E0A8B5 /* ssd.cpp */,
-				C90A5A541A0E067800E0A8B5 /* ssd.h */,
+				C90A5A531A0E067800E0A8B5 /* disk.cpp */,
+				C90A5A541A0E067800E0A8B5 /* disk.h */,
 			);
 			path = disk;
+			sourceTree = SOURCE_ROOT;
+		};
+		C9682A101A1013FB00630CD0 /* common */ = {
+			isa = PBXGroup;
+			children = (
+				C9682A111A10142800630CD0 /* op_structure.h */,
+			);
+			path = common;
 			sourceTree = SOURCE_ROOT;
 		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		C90A5A361A0E000100E0A8B5 /* coen283_project */ = {
+		C90A5A361A0E000100E0A8B5 /* SSD-based-storage-system */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = C90A5A3E1A0E000100E0A8B5 /* Build configuration list for PBXNativeTarget "coen283_project" */;
+			buildConfigurationList = C90A5A3E1A0E000100E0A8B5 /* Build configuration list for PBXNativeTarget "SSD-based-storage-system" */;
 			buildPhases = (
 				C90A5A331A0E000100E0A8B5 /* Sources */,
 				C90A5A341A0E000100E0A8B5 /* Frameworks */,
@@ -122,9 +135,9 @@
 			);
 			dependencies = (
 			);
-			name = coen283_project;
+			name = "SSD-based-storage-system";
 			productName = coen283_project;
-			productReference = C90A5A371A0E000100E0A8B5 /* coen283_project */;
+			productReference = C90A5A371A0E000100E0A8B5 /* SSD-based-storage-system */;
 			productType = "com.apple.product-type.tool";
 		};
 /* End PBXNativeTarget section */
@@ -141,7 +154,7 @@
 					};
 				};
 			};
-			buildConfigurationList = C90A5A321A0E000100E0A8B5 /* Build configuration list for PBXProject "coen283_project" */;
+			buildConfigurationList = C90A5A321A0E000100E0A8B5 /* Build configuration list for PBXProject "SSD-based-storage-system" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -153,7 +166,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				C90A5A361A0E000100E0A8B5 /* coen283_project */,
+				C90A5A361A0E000100E0A8B5 /* SSD-based-storage-system */,
 			);
 		};
 /* End PBXProject section */
@@ -165,7 +178,7 @@
 			files = (
 				C90A5A521A0E066000E0A8B5 /* FIFO.cpp in Sources */,
 				C90A5A4F1A0E064700E0A8B5 /* input_generator.cpp in Sources */,
-				C90A5A551A0E067800E0A8B5 /* ssd.cpp in Sources */,
+				C90A5A551A0E067800E0A8B5 /* disk.cpp in Sources */,
 				C90A5A4A1A0E04E100E0A8B5 /* main.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -250,21 +263,21 @@
 		C90A5A3F1A0E000100E0A8B5 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "SSD-based-storage-system";
 			};
 			name = Debug;
 		};
 		C90A5A401A0E000100E0A8B5 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "SSD-based-storage-system";
 			};
 			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		C90A5A321A0E000100E0A8B5 /* Build configuration list for PBXProject "coen283_project" */ = {
+		C90A5A321A0E000100E0A8B5 /* Build configuration list for PBXProject "SSD-based-storage-system" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				C90A5A3C1A0E000100E0A8B5 /* Debug */,
@@ -273,7 +286,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		C90A5A3E1A0E000100E0A8B5 /* Build configuration list for PBXNativeTarget "coen283_project" */ = {
+		C90A5A3E1A0E000100E0A8B5 /* Build configuration list for PBXNativeTarget "SSD-based-storage-system" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				C90A5A3F1A0E000100E0A8B5 /* Debug */,

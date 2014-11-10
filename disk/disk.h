@@ -6,8 +6,8 @@
 //  Copyright (c) 2014 Qianqian Zhong. All rights reserved.
 //
 
-#ifndef __coen283_project__ssd__
-#define __coen283_project__ssd__
+#ifndef __coen283_project__disk__
+#define __coen283_project__disk__
 
 #include <stdio.h>
 
