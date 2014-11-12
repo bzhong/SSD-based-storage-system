@@ -6,4 +6,7 @@ How to build and run?
 
 Currently we provide only Mac version of code to quick start using Xcode. But still we provide all source code that you can use to build and run in Linux or Windows. The only cons is there is no configure or Makefile :(. Soon later I will provide such compile options.
 
+Code format standards
+
+The code follows Google C++ style. Please refer to http://google-styleguide.googlecode.com/svn/trunk/cppguide.html.
 
