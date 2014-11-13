@@ -60,6 +60,4 @@ struct Command {
 
 BigUInt TranslateSize(const string& file_size);
 
-
-
 #endif

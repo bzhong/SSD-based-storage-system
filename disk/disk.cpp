@@ -1,6 +1,6 @@
 //
 //  ssd.cpp
-//  coen283_project
+//  SSD-based-storage-system
 //
 //  Created by Brady on 11/8/14.
 //  Copyright (c) 2014 Qianqian Zhong. All rights reserved.
