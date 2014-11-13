@@ -18,8 +18,8 @@ using namespace std;
 
 class ReplaceAlgo {
 public:
-    virtual bool Replace(Disk* ssd) = 0;
-    virtual void ExecFileOp(const FileOp& file_operation, Disk* ssd) = 0;
+    virtual bool Replace(Disk* ssd, Disk* hdd, const FileOp& file_opeartion) = 0;
+    virtual void ExecFileOp(const FileOp& file_operation, Disk* ssd, Disk* hdd) = 0;
     long double get_total_exec_time();
 protected:
     long double total_exec_time_;
@@ -28,8 +28,8 @@ protected:
 class FIFOAlgo: public ReplaceAlgo {
 public:
     FIFOAlgo();
-    bool Replace(Disk* ssd);
-    void ExecFileOp(const FileOp& file_operation, Disk* ssd);
+    bool Replace(Disk* ssd, Disk* hdd, const FileOp& file_opeartion);
+    void ExecFileOp(const FileOp& file_operation, Disk* ssd, Disk* hdd);
 private:
     queue<FileOp> file_pool_;
 };
@@ -37,8 +37,8 @@ private:
 class MQAAlgo: public ReplaceAlgo {
 public:
     MQAAlgo(const int& number_of_tier);
-    bool Replace(Disk* ssd);
-    void ExecFileOp(const FileOp& file_opeartion, Disk* ssd);
+    bool Replace(Disk* ssd, Disk* hdd, const FileOp& file_operation);
+    void ExecFileOp(const FileOp& file_opeartion, Disk* ssd, Disk* hdd);
 private:
     vector<list<FileOp> > file_pool_;
     map<string, pair<int, list<FileOp>::iterator> > file_search_table_;

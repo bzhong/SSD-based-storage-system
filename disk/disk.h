@@ -13,7 +13,7 @@
 
 class Disk {
 public:
-    virtual void ExecTimeAddedToTotalTime(const int& file_op_type, const BigUInt& file_size);
+    virtual void AddFileAndUpdateTotalTime(const int& file_op_type, const BigUInt& file_size);
     virtual void ReleaseSpaceByDeleteFile(const BigUInt& file_size);
     virtual long double get_total_exec_time();
     virtual BigUInt get_current_free_space();

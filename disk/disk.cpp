@@ -8,7 +8,7 @@
 
 #include "disk.h"
 
-void Disk::ExecTimeAddedToTotalTime(const int &file_op_type, const BigUInt &file_size) {
+void Disk::AddFileAndUpdateTotalTime(const int &file_op_type, const BigUInt &file_size) {
     long double exec_time = 0.0;
     switch (file_op_type) {
         case kReadOp:

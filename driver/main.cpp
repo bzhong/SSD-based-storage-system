@@ -40,9 +40,11 @@ BigUInt TranslateSize(const string& file_size) {
     return real_size;
 }
 
-void Initialize(ReplaceAlgo** replacement_algo, Disk** disk) {
+void Initialize(ReplaceAlgo** replacement_algo, Disk** ssd, Disk** hdd) {
     srand(static_cast<unsigned int>(time(NULL)));
-    int replacement_algo_type = kMQA;
+    cout << "Please choose repalcement algo: 0 for FIFO, 1 for LRU, 2 for RR and 3 for MQA" << endl;
+    int replacement_algo_type;
+    cin >> replacement_algo_type;
     switch(replacement_algo_type) {
         case kFIFO:
             *replacement_algo = new FIFOAlgo();
@@ -55,7 +57,8 @@ void Initialize(ReplaceAlgo** replacement_algo, Disk** disk) {
             *replacement_algo = new MQAAlgo(4);
             break;
     }
-    *disk = new SSD(TranslateSize("540MB"), TranslateSize("520MB"), TranslateSize("1GB")); // read_speed: MB/s, write_speed: MB/s, capacity: GB
+    *ssd = new SSD(TranslateSize("550MB"), TranslateSize("500MB"), TranslateSize("1GB")); // read_speed: MB/s, write_speed: MB/s, capacity: GB
+    *hdd = new HDD(TranslateSize("126MB"), TranslateSize("126MB"), TranslateSize("1TB"));
 }
 
 void AddCommands(InputGenerator* input_generator) {
@@ -78,8 +81,8 @@ void AddCommands(InputGenerator* input_generator) {
 int main() {
     InputGenerator* input_generator = new InputGenerator(2000); // vritual init time
     ReplaceAlgo* replacement_algo;
-    Disk* ssd;
-    Initialize(&replacement_algo, &ssd);
+    Disk* ssd, *hdd;
+    Initialize(&replacement_algo, &ssd, &hdd);
     AddCommands(input_generator);
     input_generator->GenBatchOp();
     vector<FileOp> tmp = input_generator->get_request_sequence();
@@ -87,10 +90,10 @@ int main() {
     for (int i = 0; i < tmp.size(); ++i) {
         // for debug
         //cout << tmp[i].file_name << "\t" << tmp[i].file_size << "\t" << tmp[i].file_type << "\t" << tmp[i].access_time << endl;
-        replacement_algo->ExecFileOp(tmp[i], ssd);
-        ssd->ExecTimeAddedToTotalTime(tmp[i].op_type, tmp[i].file_size);
+        replacement_algo->ExecFileOp(tmp[i], ssd, hdd);
     }
     cout << "total exec time for algo: " << replacement_algo->get_total_exec_time() << "us" << endl;
-    cout << "total exec time for disk: " << ssd->get_total_exec_time() << "us" << endl;
+    cout << "total exec time for ssd: " << ssd->get_total_exec_time() << "us" << endl;
+    cout << "total exec time for hdd: " << hdd->get_total_exec_time() << "us" << endl;
     return 0;
 }
