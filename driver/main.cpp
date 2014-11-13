@@ -42,7 +42,7 @@ BigUInt TranslateSize(const string& file_size) {
 
 void Initialize(ReplaceAlgo** replacement_algo, Disk** disk) {
     srand(static_cast<unsigned int>(time(NULL)));
-    int replacement_algo_type = kFIFO;
+    int replacement_algo_type = kMQA;
     switch(replacement_algo_type) {
         case kFIFO:
             *replacement_algo = new FIFOAlgo();
@@ -51,7 +51,8 @@ void Initialize(ReplaceAlgo** replacement_algo, Disk** disk) {
             break;
         case kRR:
             break;
-        case kOptimizedAlgo:
+        case kMQA:
+            *replacement_algo = new MQAAlgo(4);
             break;
     }
     *disk = new SSD(TranslateSize("540MB"), TranslateSize("520MB"), TranslateSize("1GB")); // read_speed: MB/s, write_speed: MB/s, capacity: GB
@@ -75,7 +76,7 @@ void AddCommands(InputGenerator* input_generator) {
 }
 
 int main() {
-    InputGenerator* input_generator = new InputGenerator(100); // vritual init time
+    InputGenerator* input_generator = new InputGenerator(2000); // vritual init time
     ReplaceAlgo* replacement_algo;
     Disk* ssd;
     Initialize(&replacement_algo, &ssd);

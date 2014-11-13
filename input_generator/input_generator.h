@@ -32,7 +32,6 @@ public:
     void ClearCommand();
 private:
     vector<Command> commands_;
-    BigUInt system_init_time_;
     vector<FileOp> request_sequence_;
 };
 

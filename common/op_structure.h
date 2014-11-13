@@ -16,7 +16,7 @@ using namespace std;
 
 typedef unsigned long long BigUInt;
 const int kFileNameLength = 20;
-
+extern BigUInt system_init_time;
 
 enum FileOpType {
     kReadOp = 0,
@@ -36,7 +36,7 @@ enum ReplacementAlgoType {
     kFIFO = 0,
     kLRU = 1,
     kRR = 2,
-    kOptimizedAlgo = 3,
+    kMQA = 3,
 };
 
 
@@ -57,5 +57,9 @@ struct Command {
     int file_type;
     Command(): file_size_min(0), file_size_max(1024), file_number(1), file_operation(kReadOp), file_type(kText) {}
 };
+
+BigUInt TranslateSize(const string& file_size);
+
+
 
 #endif
