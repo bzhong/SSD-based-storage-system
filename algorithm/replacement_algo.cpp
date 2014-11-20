@@ -100,7 +100,7 @@ bool MQAAlgo::Replace(SSD *ssd, HDD* hdd) {
 void MQAAlgo::ExecReplace(SSD* ssd, HDD* hdd) {
     time_t timer;
     time(&timer);
-    timer = (BigUInt)timer + g_system_init_time;
+    timer = (BigUInt)timer;
     for (int tier = 0; tier < 4; ++tier) {
         while (!file_pool_[tier].empty()) {
             if (cur_threshold - timer + file_pool_[tier].front().access_time <= 0) {
@@ -153,7 +153,7 @@ int MQAAlgo::SetTier(const FileOp &file_operation) {
 
 void MQAAlgo::UpdateFileSearchTable(const FileOp &file_operation) {
     pair<int, list<FileOp>::iterator> comb = file_search_table_[file_operation.file_name];
-    comb.second->access_time = g_system_init_time + time(NULL);
+    comb.second->access_time = file_operation.access_time;
     comb.second->op_type = file_operation.op_type;
     comb.second->file_size = file_operation.file_size; // may have problems with special read (>)
     file_pool_[comb.first].push_back(*comb.second);
