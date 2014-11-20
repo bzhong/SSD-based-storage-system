@@ -9,14 +9,16 @@
 #include "input_generator.h"
 using namespace std;
 
-BigUInt system_init_time;
+BigUInt g_system_init_time;
 
 InputGenerator::InputGenerator(const BigUInt& time) {
-    system_init_time = time;
+    g_system_init_time = time;
+    commands_.clear();
+    request_sequence_.clear();
 }
 
 void InputGenerator::set_system_init_time(const BigUInt& value) {
-    system_init_time = value;
+    g_system_init_time = value;
 }
 
 /*FileOp* InputGenerator::GenReadOp(const string& file_name, const BigUInt& file_size, const int& file_type, const int& op_type, const BigUInt& access_time) {
@@ -72,7 +74,7 @@ BigUInt InputGenerator::RandomFileSize(BigUInt min_size, BigUInt max_size) {
 BigUInt InputGenerator::GetCurrentTime() {
     time_t timer;
     time(&timer);
-    return (BigUInt)timer + system_init_time;
+    return (BigUInt)timer + g_system_init_time;
 }
 
 void InputGenerator::GenBatchOp() {

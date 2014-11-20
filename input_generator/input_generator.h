@@ -9,7 +9,6 @@
 #ifndef SSD_based_storage_system_input_generator_h
 #define SSD_based_storage_system_input_generator_h
 
-#include <vector>
 #include <cstdlib>
 #include "op_structure.h"
 using namespace std;
@@ -33,6 +32,7 @@ public:
 private:
     vector<Command> commands_;
     vector<FileOp> request_sequence_;
+    const int kFileNameLength = 20;
 };
 
 typedef FileOp* (InputGenerator::*op_ptr)(const string& file_name, const BigUInt& file_size, const int& file_type, const int& op_type, const BigUInt& access_time);

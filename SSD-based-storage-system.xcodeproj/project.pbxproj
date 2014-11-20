@@ -11,6 +11,7 @@
 		C90A5A4F1A0E064700E0A8B5 /* input_generator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C90A5A4E1A0E064700E0A8B5 /* input_generator.cpp */; };
 		C90A5A521A0E066000E0A8B5 /* replacement_algo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C90A5A501A0E066000E0A8B5 /* replacement_algo.cpp */; };
 		C90A5A551A0E067800E0A8B5 /* disk.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C90A5A531A0E067800E0A8B5 /* disk.cpp */; };
+		C90DC2F01A1D5BC4003FE3D2 /* op_structure.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C90DC2EF1A1D5BC4003FE3D2 /* op_structure.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -33,6 +34,7 @@
 		C90A5A511A0E066000E0A8B5 /* replacement_algo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = replacement_algo.h; sourceTree = "<group>"; };
 		C90A5A531A0E067800E0A8B5 /* disk.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = disk.cpp; sourceTree = "<group>"; };
 		C90A5A541A0E067800E0A8B5 /* disk.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = disk.h; sourceTree = "<group>"; };
+		C90DC2EF1A1D5BC4003FE3D2 /* op_structure.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = op_structure.cpp; sourceTree = "<group>"; };
 		C9682A0F1A0F3FA200630CD0 /* input_generator.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = input_generator.h; sourceTree = "<group>"; };
 		C9682A111A10142800630CD0 /* op_structure.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = op_structure.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -116,6 +118,7 @@
 			isa = PBXGroup;
 			children = (
 				C9682A111A10142800630CD0 /* op_structure.h */,
+				C90DC2EF1A1D5BC4003FE3D2 /* op_structure.cpp */,
 			);
 			path = common;
 			sourceTree = SOURCE_ROOT;
@@ -176,6 +179,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C90DC2F01A1D5BC4003FE3D2 /* op_structure.cpp in Sources */,
 				C90A5A521A0E066000E0A8B5 /* replacement_algo.cpp in Sources */,
 				C90A5A4F1A0E064700E0A8B5 /* input_generator.cpp in Sources */,
 				C90A5A551A0E067800E0A8B5 /* disk.cpp in Sources */,

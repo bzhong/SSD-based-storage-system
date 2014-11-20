@@ -10,19 +10,27 @@
 #define SSD_based_storage_system_op_structure_h
 
 #include <string>
+#include <sstream>
 #include <iostream>
+#include <unordered_map>
+#include <cstdint>
+#include <vector>
+#include <queue>
+#include <list>
+#include <map>
 #include <ctime>
+#include <set>
 using namespace std;
 
-typedef unsigned long long BigUInt;
-const int kFileNameLength = 20;
-extern BigUInt system_init_time;
+typedef uint64_t BigUInt;
+extern BigUInt g_system_init_time;
 
 enum FileOpType {
     kReadOp = 0,
     kWriteOp = 1,
     kCreateOp = 2,
     kDeleteOp = 3,
+    kIdleOp = 4,
 };
 
 enum FileType {
@@ -30,7 +38,9 @@ enum FileType {
     kPicture = 1,
     kAudio = 2,
     kVideo = 3,
+    kOther = 4,
 };
+
 
 enum ReplacementAlgoType {
     kFIFO = 0,
@@ -44,9 +54,9 @@ struct FileOp {
     string file_name;
     int op_type;
     BigUInt file_size;
-    int file_type;
+    string file_type;
     BigUInt access_time;
-    FileOp(): file_name(""), op_type(-1), file_size(0), file_type(-1), access_time(0) {}
+    FileOp(): file_name(""), op_type(-1), file_size(0), file_type(""), access_time(0) {}
 };
 
 struct Command {
@@ -54,8 +64,8 @@ struct Command {
     BigUInt file_size_max;
     BigUInt file_number;
     int file_operation;
-    int file_type;
-    Command(): file_size_min(0), file_size_max(1024), file_number(1), file_operation(kReadOp), file_type(kText) {}
+    string file_type;
+    Command(): file_size_min(0), file_size_max(1024), file_number(1), file_operation(-1), file_type("") {}
 };
 
 BigUInt TranslateSize(const string& file_size);
