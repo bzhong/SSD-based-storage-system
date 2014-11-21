@@ -34,6 +34,7 @@ class MQAAlgo: public ReplaceAlgo {
 public:
     MQAAlgo(const int& number_of_tier);
     bool Replace(SSD* ssd, HDD* hdd);
+    void ExecFileOp(const FileOp& file_operation);
     void ExecFileOp(const FileOp& file_opeartion, SSD* ssd, HDD* hdd);
     void ExecReplace(SSD* ssd, HDD* hdd);
     int SetTier(const FileOp& file_operation);

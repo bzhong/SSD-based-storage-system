@@ -166,6 +166,10 @@ void MQAAlgo::AddFile(const int &tier, const FileOp &file_operation) {
     file_search_table_[file_operation.file_name] = pair<int, list<FileOp>::iterator>(tier, last_element);
 }
 
+void MQAAlgo::ExecFileOp(const FileOp &file_operation) {
+    return;
+}
+
 void MQAAlgo::ExecFileOp(const FileOp& file_operation, SSD *ssd, HDD* hdd) {
     clock_t begin_time, end_time;
     int status;
