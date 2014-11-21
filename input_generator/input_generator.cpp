@@ -130,6 +130,8 @@ void FileSet::GenerateFile(const CfgFileSet& cfg)
 
 void InputGenerator::SendRequest()
 {
+    mqa.ExecFileOp(gfileop);
+    
     cout<<"op_type:"<<gfileop.op_type<<"\t";
     cout<<"name:"<<gfileop.file_name<<"\t";
     cout<<"size:"<<gfileop.file_size<<"\t";

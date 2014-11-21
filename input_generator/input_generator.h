@@ -14,6 +14,8 @@
 #include <chrono>
 #include "tinyxml2.h"
 #include "op_structure.h"
+#include "replacement_algo.h"
+
 using namespace std;
 const int DEFAULT_FILE_IN_SET = 1;
 const BigUInt DEFAULT_FILE_SIZE = 1024 * 1024;
@@ -158,6 +160,9 @@ private:
     int     idle_chance;
     vector<FileSet> setlist;
 
+    MQAAlgo mqa;
+    FIFOAlgo fifo;
+    
     void IdleTrigger(void);
     void SendRequest(void);
     

@@ -243,6 +243,8 @@ void MQAAlgo::ExecFileOp(const FileOp& file_operation, SSD *ssd, HDD* hdd) {
         return;
     }
     else if (file_operation.op_type == kIdleOp) {
+        end_time = clock();
+        total_exec_time_ += ((long double)(end_time - begin_time)) / CLOCKS_PER_SEC;
         double percentage = (double)ssd->get_current_free_space() / ssd->get_capacity_size();
         if (percentage < fspace_to_threshold_map[0].first) {
             cur_threshold /= fspace_to_threshold_map[0].second;
