@@ -13,23 +13,28 @@
 
 class Disk {
 public:
-    long double get_total_exec_time();
+    Disk() {}
+    virtual ~Disk() {}
+    long double get_total_exec_time(); // unit: ms
     BigUInt get_current_free_space();
     BigUInt get_capacity_size();
-    virtual int Write(const FileOp& file_operation);
-    virtual int Read(const FileOp& file_operation);
-    virtual bool Find(const FileOp& file_operation);
+    virtual BigUInt get_buffer_size();
+    virtual int Write(const FileOp& file_operation)=0;
+    virtual int Read(const FileOp& file_operation)=0;
+    virtual int Delete(const FileOp& file_operation)=0;
+    virtual bool Find(const FileOp& file_operation)=0;
 protected:
     long double total_exec_time_;
-    BigUInt read_speed_; // unit: B
-    BigUInt write_speed_; // unit: B
-    BigUInt capacity_size_; // unit: B
-    BigUInt current_free_space_; // unit: B
+    BigUInt read_speed_; // unit: Byte
+    BigUInt write_speed_; // unit: Byte
+    BigUInt capacity_size_; // unit: Byte
+    BigUInt current_free_space_; // unit: Byte
 };
 
 class HDD: public Disk {
 public:
     HDD(const BigUInt& r_speed, const BigUInt& w_speed, const BigUInt& c_size, const long double& s_time); // seek time: ms
+    ~HDD() {}
     int Write(const FileOp& file_operation);
     int Read(const FileOp& file_operation);
     int Delete(const FileOp& file_operation);
@@ -42,13 +47,15 @@ private:
 class SSD: public Disk {
 public:
     SSD(const BigUInt& r_speed, const BigUInt& w_speed, const BigUInt& c_size);
+    ~SSD() {}
     int Write(const FileOp& file_operation);
     int Read(const FileOp& file_operation);
     int Delete(const FileOp& file_operation);
+    bool Find(const FileOp& file_operation);
     BigUInt get_buffer_size();
 private:
     unordered_map<string, FileOp> contents_;
     BigUInt buffer_size_;
 };
 
-#endif /* defined(__coen283_project__ssd__) */
+#endif /* defined(__SSD-based-storage-system__ssd__) */

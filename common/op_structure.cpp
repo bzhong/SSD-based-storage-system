@@ -26,7 +26,8 @@ BigUInt TranslateSize(const string& file_size) {
     }
     else if (file_size.find("TB") != string::npos) {
         end_pos = file_size.find("TB");
-        real_size = stoi(file_size.substr(0, end_pos)) * 1024 * 1024 * 1024 * 1024;
+        BigUInt tmp = stoi(file_size.substr(0, end_pos));
+        real_size =  tmp * 1024 * 1024 * 1024 * 1024;
     }
     else if (file_size.find("B") != string::npos) {
         end_pos = file_size.find("B");

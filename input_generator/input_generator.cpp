@@ -128,13 +128,36 @@ void FileSet::GenerateFile(const CfgFileSet& cfg)
     }
 }
 
+InputGenerator::InputGenerator() {
+    cout << "Please choose which algo to use: 1 MQA, 2 FIFO, 3 LRU, 4 Round Robin" << endl;
+    int option;
+    cin >> option;
+    switch (option) {
+        case 1:
+            replace_algo = new MQAAlgo();
+            break;
+        case 2:
+            replace_algo = new FIFOAlgo();
+            break;
+        case 3:
+            break;
+        case 4:
+            break;
+    }
+}
+
+InputGenerator::~InputGenerator() {
+    delete replace_algo;
+    replace_algo = NULL;
+}
+
 void InputGenerator::SendRequest()
 {
-    mqa.ExecFileOp(gfileop);
+    replace_algo->ExecFileOp(gfileop);
     
     cout<<"op_type:"<<gfileop.op_type<<"\t";
     cout<<"name:"<<gfileop.file_name<<"\t";
-    cout<<"size:"<<gfileop.file_size<<"\t";
+    cout<<"size:"<<gfileop.file_size<<"B\t";
     cout<<"type:"<<gfileop.file_type<<"\t";
     cout<<"access_time:"<<gfileop.access_time<<endl;
 }
@@ -174,6 +197,12 @@ void InputGenerator::Run()
         }
         
     }
+    
+    // print results about exec time and hit rate.
+    cout << "algo exec time: " << replace_algo->get_total_exec_time() << "ms" << endl;
+    cout << "ssd exec time: " << replace_algo->get_ssd_exec_time() << "ms" << endl;
+    cout << "hdd exec time: " << replace_algo->get_hdd_exec_time() << "ms" << endl;
+    cout << "hit count: " << (long double)replace_algo->GetHitCount() / replace_algo->GetReqCount() << endl;
 }
 
 BigUInt Driver::ParseLength(const char* length)

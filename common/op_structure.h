@@ -13,6 +13,7 @@
 #include <sstream>
 #include <iostream>
 #include <unordered_map>
+#include <unordered_set>
 #include <cstdint>
 #include <vector>
 #include <queue>
@@ -41,7 +42,6 @@ enum FileType {
     kOther = 4,
 };
 
-
 enum ReplacementAlgoType {
     kFIFO = 0,
     kLRU = 1,
@@ -49,14 +49,14 @@ enum ReplacementAlgoType {
     kMQA = 3,
 };
 
-
 struct FileOp {
     string file_name;
     int op_type;
     BigUInt file_size;
-    string file_type;
+    FileType file_type;
+    //string file_type;
     BigUInt access_time;
-    FileOp(): file_name(""), op_type(-1), file_size(0), file_type(""), access_time(0) {}
+    FileOp(): file_name(""), op_type(-1), file_size(0), file_type(kOther), access_time(0) {}
 };
 
 struct Command {

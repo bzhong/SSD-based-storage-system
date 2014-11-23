@@ -9,7 +9,7 @@
 #include "disk.h"
 
 long double Disk::get_total_exec_time() {
-    return total_exec_time_ * 1000000; //us
+    return total_exec_time_ * 1000; 
 }
 
 BigUInt Disk::get_capacity_size() {
@@ -20,16 +20,8 @@ BigUInt Disk::get_current_free_space() {
     return current_free_space_;
 }
 
-int Disk::Write(const FileOp &file_operation) {
+BigUInt Disk::get_buffer_size() {
     return 0;
-}
-
-int Disk::Read(const FileOp &file_operation) {
-    return 0;
-}
-
-bool Disk::Find(const FileOp &file_operation) {
-    return false;
 }
 
 SSD::SSD(const BigUInt& r_speed, const BigUInt& w_speed, const BigUInt& c_size) {
@@ -75,6 +67,15 @@ int SSD::Delete(const FileOp &file_operation) {
     else {
         // list error code
         return 1;
+    }
+}
+
+bool SSD::Find(const FileOp &file_operation) {
+    if (contents_.find(file_operation.file_name) != contents_.end()) {
+        return true;
+    }
+    else {
+        return false;
     }
 }
 

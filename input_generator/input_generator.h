@@ -138,7 +138,8 @@ private:
 
 class InputGenerator {
 public:
-    InputGenerator(){};
+    InputGenerator();
+    ~InputGenerator();
     void Configure(const CfgGlobal& cfg)
     {
         test_lenth = cfg.test_lenth;
@@ -160,8 +161,7 @@ private:
     int     idle_chance;
     vector<FileSet> setlist;
 
-    MQAAlgo mqa;
-    FIFOAlgo fifo;
+    ReplaceAlgo *replace_algo;
     
     void IdleTrigger(void);
     void SendRequest(void);
@@ -182,7 +182,6 @@ private:
 public:
     Driver()
     {
-        
     }
     ~Driver()
     {
