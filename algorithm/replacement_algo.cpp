@@ -385,3 +385,138 @@ void MQAAlgo::ExecFileOp(const FileOp &file_operation) {
     }
 }
 
+LRUAlgo::LRUAlgo(const string& ssd_read_speed,
+                 const string& ssd_write_speed,
+                 const string& ssd_capacity,
+                 const string& hdd_read_speed,
+                 const string& hdd_write_speed,
+                 const string& hdd_capacity,
+                 const long double& hdd_seek_time) {
+    ssd_ = new SSD(TranslateSize(ssd_read_speed), TranslateSize(ssd_write_speed), TranslateSize(ssd_capacity));
+    hdd_ = new HDD(TranslateSize(hdd_read_speed), TranslateSize(hdd_write_speed), TranslateSize(hdd_capacity), hdd_seek_time);
+    total_exec_time_ = 0;
+    hit_count_ = req_count_ = 0;
+}
+
+LRUAlgo::~LRUAlgo() {
+    delete ssd_;
+    delete hdd_;
+    ssd_ = hdd_ = NULL;
+}
+
+void LRUAlgo::ExecReplace() {
+    if (file_pool_.empty()) {
+        cerr << "single file size is larger than capacity of ssd. Ignored." << endl;
+        return;
+    }
+    ssd_->Delete(file_pool_.front());
+    hdd_->Write(file_pool_.front());
+    file_search_table_.erase(file_pool_.front().file_name);
+    file_pool_.pop_front();
+}
+
+void LRUAlgo::UpdateFileSearchTable(const FileOp &file_operation) {
+    list<FileOp>::iterator comb = file_search_table_[file_operation.file_name];
+    comb->access_time = file_operation.access_time;
+    comb->op_type = file_operation.op_type;
+    comb->file_size = file_operation.file_size;
+    file_pool_.push_back(*comb);
+    file_pool_.erase(comb);
+    list<FileOp>::iterator last_element = --file_pool_.end();
+    file_search_table_[file_operation.file_name] = last_element;
+}
+
+void LRUAlgo::ExecFileOp(const FileOp& file_operation) {
+    clock_t begin_time, end_time;
+    int status;
+    begin_time = clock();
+    ++req_count_;
+    if (file_operation.op_type == kReadOp) {
+        if (file_search_table_.find(file_operation.file_name) != file_search_table_.end()) {
+            UpdateFileSearchTable(file_operation);
+            ++hit_count_;
+            end_time = clock();
+            total_exec_time_ += ((long double)(end_time - begin_time)) / CLOCKS_PER_SEC;
+        }
+        else if (hdd_->Find(file_operation)) {
+            file_pool_.push_back(file_operation);
+            file_search_table_[file_operation.file_name] = --file_pool_.end();
+            end_time = clock();
+            total_exec_time_ += ((long double)(end_time - begin_time)) / CLOCKS_PER_SEC;
+            status = ssd_->Write(file_operation);
+            if (status) {
+                cerr << "ssd write error in swap read from hdd." << endl;
+                exit(1);
+            }
+            status = hdd_->Delete(file_operation);
+            if (status) {
+                cerr << "hdd delete error in swap read from hdd." << endl;
+                exit(1);
+            }
+        }
+        else {
+            cerr << "file: " << file_operation.file_name << " doesn't exist. Ignored." << endl;
+            end_time = clock();
+            total_exec_time_ += ((long double)(end_time - begin_time)) / CLOCKS_PER_SEC;
+            return;
+        }
+        status = ssd_->Read(file_operation);
+        if (status) {
+            cerr << "ssd read error for file: " << file_operation.file_name << endl;
+        }
+        return;
+    }
+    else if (file_operation.op_type == kWriteOp || file_operation.op_type == kCreateOp) {
+        if (file_search_table_.find(file_operation.file_name) != file_search_table_.end()) {
+            ++hit_count_;
+            UpdateFileSearchTable(file_operation);
+            end_time = clock();
+            total_exec_time_ += ((long double)(end_time - begin_time)) / CLOCKS_PER_SEC;
+        }
+        else if (hdd_->Find(file_operation)) {
+            file_pool_.push_back(file_operation);
+            file_search_table_[file_operation.file_name] = --file_pool_.end();
+            end_time = clock();
+            total_exec_time_ += ((long double)(end_time - begin_time)) / CLOCKS_PER_SEC;
+            status = ssd_->Write(file_operation);
+            if (status) {
+                cerr << "ssd write error in swap write from hdd." << endl;
+                exit(1);
+            }
+            status = hdd_->Delete(file_operation);
+            if (status) {
+                cerr << "hdd delete error in swap write from hdd." << endl;
+                exit(1);
+            }
+        }
+        else {
+            if (file_operation.op_type == kWriteOp) {
+                cerr << "ssd write error. file " << file_operation.file_name << " doesn't exist. Ignored." << endl;
+                end_time = clock();
+                total_exec_time_ += ((long double)(end_time - begin_time)) / CLOCKS_PER_SEC;
+                return;
+            }
+            while (file_operation.file_size > ssd_->get_current_free_space()) {
+                ExecReplace();
+            }
+            file_pool_.push_back(file_operation);
+            file_search_table_[file_operation.file_name] = --file_pool_.end();
+            end_time = clock();
+            total_exec_time_ += ((long double)(end_time - begin_time)) / CLOCKS_PER_SEC;
+        }
+        status = ssd_->Write(file_operation);
+        if (status) {
+            cerr << "ssd write error for file: " << file_operation.file_name << endl;
+        }
+        return;
+    }
+}
+
+
+
+
+
+
+
+
+

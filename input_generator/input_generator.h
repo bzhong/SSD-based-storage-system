@@ -161,7 +161,7 @@ private:
     int     idle_chance;
     vector<FileSet> setlist;
 
-    ReplaceAlgo *replace_algo;
+    ReplaceAlgo *replace_algo[3];
     
     void IdleTrigger(void);
     void SendRequest(void);

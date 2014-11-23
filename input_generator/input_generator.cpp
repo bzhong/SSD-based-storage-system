@@ -129,31 +129,23 @@ void FileSet::GenerateFile(const CfgFileSet& cfg)
 }
 
 InputGenerator::InputGenerator() {
-    cout << "Please choose which algo to use: 1 MQA, 2 FIFO, 3 LRU, 4 Round Robin" << endl;
-    int option;
-    cin >> option;
-    switch (option) {
-        case 1:
-            replace_algo = new MQAAlgo();
-            break;
-        case 2:
-            replace_algo = new FIFOAlgo();
-            break;
-        case 3:
-            break;
-        case 4:
-            break;
-    }
+    replace_algo[0] = new MQAAlgo();
+    replace_algo[1] = new FIFOAlgo();
+    replace_algo[2] = new LRUAlgo();
 }
 
 InputGenerator::~InputGenerator() {
-    delete replace_algo;
-    replace_algo = NULL;
+    for (int count = 0; count < 3; ++count) {
+        delete replace_algo[count];
+        replace_algo[count] = NULL;
+    }
 }
 
 void InputGenerator::SendRequest()
 {
-    replace_algo->ExecFileOp(gfileop);
+    for (int count = 0; count < 3; ++count) {
+        replace_algo[count]->ExecFileOp(gfileop);
+    }
     
     cout<<"op_type:"<<gfileop.op_type<<"\t";
     cout<<"name:"<<gfileop.file_name<<"\t";
@@ -199,10 +191,14 @@ void InputGenerator::Run()
     }
     
     // print results about exec time and hit rate.
-    cout << "algo exec time: " << replace_algo->get_total_exec_time() << "ms" << endl;
-    cout << "ssd exec time: " << replace_algo->get_ssd_exec_time() << "ms" << endl;
-    cout << "hdd exec time: " << replace_algo->get_hdd_exec_time() << "ms" << endl;
-    cout << "hit count: " << (long double)replace_algo->GetHitCount() / replace_algo->GetReqCount() << endl;
+    cout << "print results: 1 for MQA, 2 for FIFO, 3 for LRU" << endl;
+    for (int count = 0; count < 3; ++count) {
+        cout << "Algo " << count + 1 << endl;
+        cout << "algo exec time: " << replace_algo[count]->get_total_exec_time() << "ms" << endl;
+        cout << "ssd exec time: " << replace_algo[count]->get_ssd_exec_time() << "ms" << endl;
+        cout << "hdd exec time: " << replace_algo[count]->get_hdd_exec_time() << "ms" << endl;
+        cout << "hit count: " << (long double)replace_algo[count]->GetHitCount() / replace_algo[count]->GetReqCount() << endl;
+    }
 }
 
 BigUInt Driver::ParseLength(const char* length)
