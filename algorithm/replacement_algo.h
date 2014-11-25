@@ -93,4 +93,21 @@ private:
     unordered_map<string, list<FileOp>::iterator> file_search_table_;
 };
 
+/*class ClockAlgo: public ReplaceAlgo {
+public:
+    ClockAlgo(const string& ssd_read_speed = "550GB",
+            const string& ssd_write_speed = "500GB",
+            const string& ssd_capacity = "256GB",
+            const string& hdd_read_speed = "126GB",
+            const string& hdd_write_speed = "126GB",
+            const string& hdd_capacity = "4TB",
+            const long double& hdd_seek_time = 10);
+    ~ClockAlgo();
+    void ExecReplace();
+    void UpdateFileSearchTable(const FileOp& file_operation);
+    void ExecFileOp(const FileOp& file_operation);
+private:
+    
+};*/
+
 #endif /* defined(__coen283_project__FIFO__) */

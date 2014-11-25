@@ -512,9 +512,28 @@ void LRUAlgo::ExecFileOp(const FileOp& file_operation) {
     }
 }
 
+/*ClockAlgo::ClockAlgo(const string& ssd_read_speed,
+          const string& ssd_write_speed,
+          const string& ssd_capacity,
+          const string& hdd_read_speed,
+          const string& hdd_write_speed,
+          const string& hdd_capacity,
+          const long double& hdd_seek_time) {
+    ssd_ = new SSD(TranslateSize(ssd_read_speed), TranslateSize(ssd_write_speed), TranslateSize(ssd_capacity));
+    hdd_ = new HDD(TranslateSize(hdd_read_speed), TranslateSize(hdd_write_speed), TranslateSize(hdd_capacity), hdd_seek_time);
+    total_exec_time_ = 0;
+    hit_count_ = req_count_ = 0;
+}
 
+ClockAlgo::~ClockAlgo() {
+    delete ssd_;
+    delete hdd_;
+    ssd_ = hdd_ = NULL;
+}
 
-
+void ClockAlgo::ExecFileOp(const FileOp& file_operation) {
+    
+}*/
 
 
 
