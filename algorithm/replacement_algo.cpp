@@ -70,6 +70,18 @@ void FIFOAlgo::ExecFileOp(const FileOp& file_operation) {
             total_exec_time_ += ((long double)(end_time - begin_time)) / CLOCKS_PER_SEC;
         }
         else if (hdd_->Find(file_operation)) {
+            if (file_operation.file_size > ssd_->get_capacity_size()) {
+                end_time = clock();
+                total_exec_time_ += ((long double)(end_time - begin_time)) / CLOCKS_PER_SEC;
+                status = hdd_->Read(file_operation);
+                if (status) {
+                    cerr << "hdd read error for file: " << file_operation.file_name << ". The file doesn't exist." << endl;
+                }
+                return;
+            }
+            while (file_operation.file_size > ssd_->get_current_free_space()) {
+                ExecReplace();
+            }
             file_pool_.push(file_operation);
             file_search_table_.insert(file_operation.file_name);
             end_time = clock();
@@ -101,8 +113,23 @@ void FIFOAlgo::ExecFileOp(const FileOp& file_operation) {
             ++hit_count_;
             end_time = clock();
             total_exec_time_ += ((long double)(end_time - begin_time)) / CLOCKS_PER_SEC;
+            ssd_->Delete(file_operation);
+            ssd_->Write(file_operation);
+            return;
         }
         else if (hdd_->Find(file_operation)) {
+            if (file_operation.file_size > ssd_->get_capacity_size()) {
+                end_time = clock();
+                total_exec_time_ += ((long double)(end_time - begin_time)) / CLOCKS_PER_SEC;
+                status = hdd_->Write(file_operation);
+                if (status) {
+                    cerr << "hdd write error for file: " << file_operation.file_name << endl;
+                }
+                return;
+            }
+            while (file_operation.file_size > ssd_->get_current_free_space()) {
+                ExecReplace();
+            }
             file_pool_.push(file_operation);
             file_search_table_.insert(file_operation.file_name);
             end_time = clock();
@@ -123,6 +150,15 @@ void FIFOAlgo::ExecFileOp(const FileOp& file_operation) {
                 cerr << "ssd write error. file " << file_operation.file_name << " doesn't exist. Ignored." << endl;
                 end_time = clock();
                 total_exec_time_ += ((long double)(end_time - begin_time)) / CLOCKS_PER_SEC;
+                return;
+            }
+            if (file_operation.file_size > ssd_->get_capacity_size()) {
+                end_time = clock();
+                total_exec_time_ += ((long double)(end_time - begin_time)) / CLOCKS_PER_SEC;
+                status = hdd_->Write(file_operation);
+                if (status) {
+                    cerr << "hdd write error for file: " << file_operation.file_name << endl;
+                }
                 return;
             }
             while (file_operation.file_size > ssd_->get_current_free_space()) {
@@ -185,9 +221,9 @@ MQAAlgo::~MQAAlgo() {
     ssd_ = hdd_ = NULL;
 }
 
-bool MQAAlgo::Replace() {
+bool MQAAlgo::Replace(const BigUInt& needed_size) {
     int last_tier = (int)file_pool_.size() - 1;
-    while (ssd_->get_current_free_space() < ssd_->get_buffer_size()) {
+    while (ssd_->get_current_free_space() < needed_size) {
         while (file_pool_[last_tier].empty()) {
             --last_tier;
             if (last_tier < 0) {
@@ -216,9 +252,6 @@ void MQAAlgo::ExecReplace() {
                 break;
             }
         }
-    }
-    if (ssd_->get_current_free_space() < ssd_->get_buffer_size()) {
-        Replace();
     }
 }
 
@@ -294,6 +327,18 @@ void MQAAlgo::ExecFileOp(const FileOp &file_operation) {
             total_exec_time_ += ((long double)(end_time - begin_time)) / CLOCKS_PER_SEC;
         }
         else if (hdd_->Find(file_operation)) {
+            if (file_operation.file_size > ssd_->get_capacity_size()) {
+                end_time = clock();
+                total_exec_time_ += ((long double)(end_time - begin_time)) / CLOCKS_PER_SEC;
+                status = hdd_->Read(file_operation);
+                if (status) {
+                    cerr << "hdd read error for file: " << file_operation.file_name << ". The file doesn't exist." << endl;
+                }
+                return;
+            }
+            if (file_operation.file_size > ssd_->get_current_free_space()) {
+                Replace(file_operation.file_size);
+            }
             int tier = SetTier(file_operation); //need frequency to adjust
             AddFile(tier, file_operation);
             end_time = clock();
@@ -327,8 +372,23 @@ void MQAAlgo::ExecFileOp(const FileOp &file_operation) {
             UpdateFileSearchTable(file_operation);
             end_time = clock();
             total_exec_time_ += ((long double)(end_time - begin_time)) / CLOCKS_PER_SEC;
+            ssd_->Delete(file_operation);
+            ssd_->Write(file_operation);
+            return;
         }
         else if (hdd_->Find(file_operation)) {
+            if (file_operation.file_size > ssd_->get_capacity_size()) {
+                end_time = clock();
+                total_exec_time_ += ((long double)(end_time - begin_time)) / CLOCKS_PER_SEC;
+                status = hdd_->Write(file_operation);
+                if (status) {
+                    cerr << "hdd write error for file: " << file_operation.file_name << endl;
+                }
+                return;
+            }
+            if (file_operation.file_size > ssd_->get_current_free_space()) {
+                Replace(file_operation.file_size);
+            }
             int tier = SetTier(file_operation);
             AddFile(tier, file_operation);
             end_time = clock();
@@ -352,8 +412,21 @@ void MQAAlgo::ExecFileOp(const FileOp &file_operation) {
                 return;
             }
             while (file_operation.file_size > ssd_->get_current_free_space()) {
+                if (file_operation.file_size > ssd_->get_capacity_size()) {
+                    //cout << "file " << file_operation.file_name << " is too large to put in ssd. write to hdd." << endl;
+                    end_time = clock();
+                    total_exec_time_ += ((long double)(end_time - begin_time)) / CLOCKS_PER_SEC;
+                    status = hdd_->Write(file_operation);
+                    if (status) {
+                        cerr << "hdd write error for file: " << file_operation.file_name << endl;
+                    }
+                    return;
+                }
                 cur_threshold_ = basic_threshold_ / fspace_to_threshold_map_[0].second;
                 ExecReplace();
+                if (file_operation.file_size > ssd_->get_current_free_space()) {
+                    Replace(file_operation.file_size);
+                }
             }
             cur_threshold_ = basic_threshold_;
             int tier = SetTier(file_operation);
@@ -382,6 +455,9 @@ void MQAAlgo::ExecFileOp(const FileOp &file_operation) {
             cur_threshold_ = basic_threshold_;
         }
         ExecReplace();
+        if (ssd_->get_current_free_space() < ssd_->get_buffer_size()) {
+            Replace(ssd_->get_buffer_size());
+        }
     }
 }
 
@@ -439,6 +515,18 @@ void LRUAlgo::ExecFileOp(const FileOp& file_operation) {
             total_exec_time_ += ((long double)(end_time - begin_time)) / CLOCKS_PER_SEC;
         }
         else if (hdd_->Find(file_operation)) {
+            if (file_operation.file_size > ssd_->get_capacity_size()) {
+                end_time = clock();
+                total_exec_time_ += ((long double)(end_time - begin_time)) / CLOCKS_PER_SEC;
+                status = hdd_->Read(file_operation);
+                if (status) {
+                    cerr << "hdd read error for file: " << file_operation.file_name << ". The file doesn't exist." << endl;
+                }
+                return;
+            }
+            while (file_operation.file_size > ssd_->get_current_free_space()) {
+                ExecReplace();
+            }
             file_pool_.push_back(file_operation);
             file_search_table_[file_operation.file_name] = --file_pool_.end();
             end_time = clock();
@@ -472,8 +560,23 @@ void LRUAlgo::ExecFileOp(const FileOp& file_operation) {
             UpdateFileSearchTable(file_operation);
             end_time = clock();
             total_exec_time_ += ((long double)(end_time - begin_time)) / CLOCKS_PER_SEC;
+            ssd_->Delete(file_operation);
+            ssd_->Write(file_operation);
+            return;
         }
         else if (hdd_->Find(file_operation)) {
+            if (file_operation.file_size > ssd_->get_capacity_size()) {
+                end_time = clock();
+                total_exec_time_ += ((long double)(end_time - begin_time)) / CLOCKS_PER_SEC;
+                status = hdd_->Write(file_operation);
+                if (status) {
+                    cerr << "hdd Write error for file: " << file_operation.file_name << endl;
+                }
+                return;
+            }
+            while (file_operation.file_size > ssd_->get_current_free_space()) {
+                ExecReplace();
+            }
             file_pool_.push_back(file_operation);
             file_search_table_[file_operation.file_name] = --file_pool_.end();
             end_time = clock();
@@ -494,6 +597,15 @@ void LRUAlgo::ExecFileOp(const FileOp& file_operation) {
                 cerr << "ssd write error. file " << file_operation.file_name << " doesn't exist. Ignored." << endl;
                 end_time = clock();
                 total_exec_time_ += ((long double)(end_time - begin_time)) / CLOCKS_PER_SEC;
+                return;
+            }
+            if (file_operation.file_size > ssd_->get_capacity_size()) {
+                end_time = clock();
+                total_exec_time_ += ((long double)(end_time - begin_time)) / CLOCKS_PER_SEC;
+                status = hdd_->Write(file_operation);
+                if (status) {
+                    cerr << "hdd write error for file: " << file_operation.file_name << endl;
+                }
                 return;
             }
             while (file_operation.file_size > ssd_->get_current_free_space()) {

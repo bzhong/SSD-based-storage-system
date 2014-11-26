@@ -41,7 +41,7 @@ public:
             const string& hdd_capacity = "4TB",
             const long double& hdd_seek_time = 10);
     ~MQAAlgo();
-    bool Replace();
+    bool Replace(const BigUInt& needed_size);
     void ExecFileOp(const FileOp& file_operation);
     void ExecReplace();
     int SetTier(const FileOp& file_operation);

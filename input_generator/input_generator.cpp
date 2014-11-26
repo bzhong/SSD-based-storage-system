@@ -143,15 +143,15 @@ InputGenerator::~InputGenerator() {
 
 void InputGenerator::SendRequest()
 {
-    for (int count = 0; count < 3; ++count) {
-        replace_algo[count]->ExecFileOp(gfileop);
-    }
-    
-    cout<<"op_type:"<<gfileop.op_type<<"\t";
+    /*cout<<"op_type:"<<gfileop.op_type<<"\t";
     cout<<"name:"<<gfileop.file_name<<"\t";
     cout<<"size:"<<gfileop.file_size<<"B\t";
     cout<<"type:"<<gfileop.file_type<<"\t";
-    cout<<"access_time:"<<gfileop.access_time<<endl;
+    cout<<"access_time:"<<gfileop.access_time<<endl;*/
+    
+    for (int count = 0; count < 3; ++count) {
+        replace_algo[count]->ExecFileOp(gfileop);
+    }
 }
 
 void InputGenerator::IdleTrigger(void)

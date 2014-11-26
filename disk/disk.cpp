@@ -89,17 +89,17 @@ HDD::HDD(const BigUInt& r_speed, const BigUInt& w_speed, const BigUInt& c_size, 
 }
 
 int HDD::Write(const FileOp &file_operation) {
-    if (file_operation.file_size <= current_free_space_) {
+    //if (file_operation.file_size <= current_free_space_) {
         contents_[file_operation.file_name] = file_operation;
         total_exec_time_ += (long double)file_operation.file_size / write_speed_ + seek_time_ / 1000;
-        current_free_space_ -= (long double)file_operation.file_size;
+        //current_free_space_ -= (long double)file_operation.file_size;
         return 0;
-    }
-    else {
+    //}
+    /*else {
         cerr << "HDD write error." << endl;
         // list error code
         return 1;
-    }
+    }*/
 }
 
 int HDD::Read(const FileOp& file_operation) {
@@ -114,7 +114,7 @@ int HDD::Read(const FileOp& file_operation) {
 int HDD::Delete(const FileOp &file_operation) {
     if (contents_.find(file_operation.file_name) != contents_.end()) {
         contents_.erase(file_operation.file_name);
-        current_free_space_ += file_operation.file_size;
+        //current_free_space_ += file_operation.file_size;
         return 0;
     }
     else {
