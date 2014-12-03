@@ -28,9 +28,9 @@ BigUInt ReplaceAlgo::GetHitCount() {
     return hit_count_;
 }
 
-FIFOAlgo::FIFOAlgo(const string& ssd_read_speed,
+FIFOAlgo::FIFOAlgo(const string& ssd_capacity,
+         const string& ssd_read_speed,
          const string& ssd_write_speed,
-         const string& ssd_capacity,
          const string& hdd_read_speed,
          const string& hdd_write_speed,
          const string& hdd_capacity,
@@ -463,9 +463,9 @@ void MQAAlgo::ExecFileOp(const FileOp &file_operation) {
     }
 }
 
-LRUAlgo::LRUAlgo(const string& ssd_read_speed,
+LRUAlgo::LRUAlgo(const string& ssd_capacity,
+                 const string& ssd_read_speed,
                  const string& ssd_write_speed,
-                 const string& ssd_capacity,
                  const string& hdd_read_speed,
                  const string& hdd_write_speed,
                  const string& hdd_capacity,

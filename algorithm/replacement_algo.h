@@ -60,9 +60,9 @@ private:
 
 class FIFOAlgo: public ReplaceAlgo {
 public:
-    FIFOAlgo(const string& ssd_read_speed = "550GB",
+    FIFOAlgo(const string& ssd_capacity = "256GB",
+             const string& ssd_read_speed = "550GB",
              const string& ssd_write_speed = "500GB",
-             const string& ssd_capacity = "256GB",
              const string& hdd_read_speed = "126GB",
              const string& hdd_write_speed = "126GB",
              const string& hdd_capacity = "4TB",
@@ -77,9 +77,9 @@ private:
 
 class LRUAlgo: public ReplaceAlgo {
 public:
-    LRUAlgo(const string& ssd_read_speed = "550GB",
+    LRUAlgo(const string& ssd_capacity = "256GB",
+            const string& ssd_read_speed = "550GB",
             const string& ssd_write_speed = "500GB",
-            const string& ssd_capacity = "256GB",
             const string& hdd_read_speed = "126GB",
             const string& hdd_write_speed = "126GB",
             const string& hdd_capacity = "4TB",

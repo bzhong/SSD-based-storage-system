@@ -132,6 +132,9 @@ InputGenerator::InputGenerator() {
     replace_algo[0] = new MQAAlgo();
     replace_algo[1] = new FIFOAlgo();
     replace_algo[2] = new LRUAlgo();
+    //replace_algo[0] = new MQAAlgo("50GB");
+    //replace_algo[1] = new FIFOAlgo("50GB");
+    //replace_algo[2] = new LRUAlgo("50GB");
 }
 
 InputGenerator::~InputGenerator() {
