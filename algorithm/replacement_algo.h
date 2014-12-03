@@ -32,10 +32,10 @@ protected:
 
 class MQAAlgo: public ReplaceAlgo {
 public:
-    MQAAlgo(const int& number_of_tier = 4,
+    MQAAlgo(const string& ssd_capacity = "256GB",
+            const int& number_of_tier = 4,
             const string& ssd_read_speed = "550GB",
             const string& ssd_write_speed = "500GB",
-            const string& ssd_capacity = "256GB",
             const string& hdd_read_speed = "126GB",
             const string& hdd_write_speed = "126GB",
             const string& hdd_capacity = "4TB",

@@ -14,6 +14,6 @@ using namespace std;
 int main() {
     
     Driver dr;
-    dr.RegisterFile("/Users/qianqianzhong/Documents/github/coen283_project/cfg.xml");
+    dr.RegisterFile("/Users/qianqianzhong/Documents/github/coen283_project/cfg2.xml");
     dr.Run();
 }

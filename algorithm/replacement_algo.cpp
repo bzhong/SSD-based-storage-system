@@ -176,10 +176,10 @@ void FIFOAlgo::ExecFileOp(const FileOp& file_operation) {
     }
 }
 
-MQAAlgo::MQAAlgo(const int& number_of_tier,
+MQAAlgo::MQAAlgo(const string& ssd_capacity,
+                 const int& number_of_tier,
                  const string& ssd_read_speed,
                  const string& ssd_write_speed,
-                 const string& ssd_capacity,
                  const string& hdd_read_speed,
                  const string& hdd_write_speed,
                  const string& hdd_capacity,
@@ -232,6 +232,7 @@ bool MQAAlgo::Replace(const BigUInt& needed_size) {
         }
         hdd_->Write(file_pool_[last_tier].front());
         ssd_->Delete(file_pool_[last_tier].front());
+        file_search_table_.erase(file_pool_[last_tier].front().file_name);
         file_pool_[last_tier].pop_front();
     }
     return true;
@@ -246,6 +247,7 @@ void MQAAlgo::ExecReplace() {
             if (cur_threshold_ - timer + file_pool_[tier].front().access_time <= 0) {
                 hdd_->Write(file_pool_[tier].front());
                 ssd_->Delete(file_pool_[tier].front());
+                file_search_table_.erase(file_pool_[tier].front().file_name);
                 file_pool_[tier].pop_front();
             }
             else {
