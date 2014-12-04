@@ -30,6 +30,7 @@ SSD::SSD(const BigUInt& r_speed, const BigUInt& w_speed, const BigUInt& c_size) 
     write_speed_ = w_speed;
     capacity_size_ = c_size;
     current_free_space_ = capacity_size_;
+    buffer_size_ = capacity_size_ / 4;
 }
 
 BigUInt SSD::get_buffer_size() {
@@ -37,10 +38,17 @@ BigUInt SSD::get_buffer_size() {
 }
 
 int SSD::Write(const FileOp &file_operation) {
-    if (file_operation.file_size <= current_free_space_) {
+    if (contents_.find(file_operation.file_name) != contents_.end()) {
+        // currently we don't support rewrite different size
+        //current_free_space_ = current_free_space_ + contents_.at(file_operation.file_name).file_size - file_operation.file_size;
         contents_[file_operation.file_name] = file_operation;
         total_exec_time_ += (long double)file_operation.file_size / write_speed_;
+        return 0;
+    }
+    else if (file_operation.file_size <= current_free_space_) {
         current_free_space_ -= (long double)file_operation.file_size;
+        contents_[file_operation.file_name] = file_operation;
+        total_exec_time_ += (long double)file_operation.file_size / write_speed_;
         return 0;
     }
     else {

@@ -222,7 +222,7 @@ MQAAlgo::~MQAAlgo() {
 }
 
 bool MQAAlgo::Replace(const BigUInt& needed_size) {
-    int last_tier = (int)file_pool_.size() - 1;
+    int last_tier = (int)file_pool_.size() - 1, status;
     while (ssd_->get_current_free_space() < needed_size) {
         while (file_pool_[last_tier].empty()) {
             --last_tier;
@@ -230,8 +230,16 @@ bool MQAAlgo::Replace(const BigUInt& needed_size) {
                 return false;
             }
         }
-        hdd_->Write(file_pool_[last_tier].front());
-        ssd_->Delete(file_pool_[last_tier].front());
+        status = hdd_->Write(file_pool_[last_tier].front());
+        if (status) {
+            cerr << "hdd write error in Replace process." << endl;
+            exit(1);
+        }
+        status = ssd_->Delete(file_pool_[last_tier].front());
+        if (status) {
+            cerr << "ssd delete error in Replace process." << endl;
+            exit(1);
+        }
         file_search_table_.erase(file_pool_[last_tier].front().file_name);
         file_pool_[last_tier].pop_front();
     }
@@ -405,6 +413,7 @@ void MQAAlgo::ExecFileOp(const FileOp &file_operation) {
                 cerr << "hdd delete error in swap write from hdd." << endl;
                 exit(1);
             }
+            
         }
         else {
             if (file_operation.op_type == kWriteOp) {
