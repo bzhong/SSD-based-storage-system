@@ -199,7 +199,9 @@ void InputGenerator::Run()
         cout << "Algo " << count + 1 << endl;
         cout << "algo exec time: " << replace_algo[count]->get_total_exec_time() << "ms" << endl;
         cout << "ssd exec time: " << replace_algo[count]->get_ssd_exec_time() << "ms" << endl;
+        cout.precision(20);
         cout << "hdd exec time: " << replace_algo[count]->get_hdd_exec_time() << "ms" << endl;
+        cout.precision(5);
         cout << "hit count: " << (long double)replace_algo[count]->GetHitCount() / replace_algo[count]->GetReqCount() << endl;
     }
 }

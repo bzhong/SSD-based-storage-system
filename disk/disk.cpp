@@ -40,6 +40,7 @@ BigUInt SSD::get_buffer_size() {
 int SSD::Write(const FileOp &file_operation) {
     if (contents_.find(file_operation.file_name) != contents_.end()) {
         // currently we don't support rewrite different size
+        assert(file_operation.file_size == contents_.at(file_operation.file_name).file_size);
         //current_free_space_ = current_free_space_ + contents_.at(file_operation.file_name).file_size - file_operation.file_size;
         contents_[file_operation.file_name] = file_operation;
         total_exec_time_ += (long double)file_operation.file_size / write_speed_;

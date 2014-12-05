@@ -20,6 +20,7 @@
 #include <list>
 #include <map>
 #include <ctime>
+#include <cassert>
 #include <set>
 using namespace std;
 
