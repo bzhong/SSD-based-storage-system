@@ -166,6 +166,7 @@ void FIFOAlgo::ExecFileOp(const FileOp& file_operation) {
             }
             file_pool_.push(file_operation);
             file_search_table_.insert(file_operation.file_name);
+            ++hit_count_;
             end_time = clock();
             total_exec_time_ += ((long double)(end_time - begin_time)) / CLOCKS_PER_SEC;
         }
@@ -442,6 +443,7 @@ void MQAAlgo::ExecFileOp(const FileOp &file_operation) {
             cur_threshold_ = basic_threshold_;
             int tier = SetTier(file_operation);
             AddFile(tier, file_operation);
+            ++hit_count_;
             end_time = clock();
             total_exec_time_ += ((long double)(end_time - begin_time)) / CLOCKS_PER_SEC;
         }
@@ -624,6 +626,7 @@ void LRUAlgo::ExecFileOp(const FileOp& file_operation) {
             }
             file_pool_.push_back(file_operation);
             file_search_table_[file_operation.file_name] = --file_pool_.end();
+            ++hit_count_;
             end_time = clock();
             total_exec_time_ += ((long double)(end_time - begin_time)) / CLOCKS_PER_SEC;
         }
