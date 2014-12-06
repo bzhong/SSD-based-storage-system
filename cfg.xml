@@ -1,0 +1,17 @@
+<InputGenerator>
+	<SSD>256G</SSD>
+	<test_length>3Y</test_length>
+
+	<FileSet id="0">
+		<filenum>200000</filenum>
+		<minsize>1K</minsize>
+		<maxsize>32M</maxsize>
+		<distribute>Average</distribute>
+		<writerate>20</writerate>
+		<singlerequest>10</singlerequest>
+		<frequency>1</frequency>
+		<start>0</start>
+		<length>3Y</length>
+		<type id="0">PY</type>
+	</FileSet>
+</InputGenerator>
