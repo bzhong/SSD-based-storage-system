@@ -21,6 +21,7 @@ public:
     long double get_total_exec_time();
     long double get_ssd_exec_time();
     long double get_hdd_exec_time();
+    BigUInt GetTransferTimeDelay();
     BigUInt GetHitCount();
     BigUInt GetReqCount();
 protected:

@@ -23,12 +23,17 @@ public:
     virtual int Read(const FileOp& file_operation)=0;
     virtual int Delete(const FileOp& file_operation)=0;
     virtual bool Find(const FileOp& file_operation)=0;
+    virtual void set_idle_signal(bool value);
+    BigUInt GetTransferTimeDelay();
 protected:
     long double total_exec_time_;
     BigUInt read_speed_; // unit: Byte
     BigUInt write_speed_; // unit: Byte
     BigUInt capacity_size_; // unit: Byte
     BigUInt current_free_space_; // unit: Byte
+    bool idle_signal_;
+    BigUInt transfer_time_delay_;
+
 };
 
 class HDD: public Disk {

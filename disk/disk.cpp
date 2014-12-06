@@ -24,6 +24,14 @@ BigUInt Disk::get_buffer_size() {
     return 0;
 }
 
+BigUInt Disk::GetTransferTimeDelay() {
+    return transfer_time_delay_;
+}
+
+void Disk::set_idle_signal(bool value) {
+    idle_signal_ = value;
+}
+
 SSD::SSD(const BigUInt& r_speed, const BigUInt& w_speed, const BigUInt& c_size) {
     total_exec_time_ = 0;
     read_speed_ = r_speed;
@@ -31,6 +39,8 @@ SSD::SSD(const BigUInt& r_speed, const BigUInt& w_speed, const BigUInt& c_size) 
     capacity_size_ = c_size;
     current_free_space_ = capacity_size_;
     buffer_size_ = capacity_size_ / 4;
+    idle_signal_ = false;
+    transfer_time_delay_ = 0;
 }
 
 BigUInt SSD::get_buffer_size() {
@@ -43,13 +53,19 @@ int SSD::Write(const FileOp &file_operation) {
         assert(file_operation.file_size == contents_.at(file_operation.file_name).file_size);
         //current_free_space_ = current_free_space_ + contents_.at(file_operation.file_name).file_size - file_operation.file_size;
         contents_[file_operation.file_name] = file_operation;
-        total_exec_time_ += (long double)file_operation.file_size / write_speed_;
+        if (!idle_signal_) {
+            total_exec_time_ += (long double)file_operation.file_size / write_speed_;
+            ++transfer_time_delay_;
+        }
         return 0;
     }
     else if (file_operation.file_size <= current_free_space_) {
         current_free_space_ -= (long double)file_operation.file_size;
         contents_[file_operation.file_name] = file_operation;
-        total_exec_time_ += (long double)file_operation.file_size / write_speed_;
+        if (!idle_signal_) {
+            total_exec_time_ += (long double)file_operation.file_size / write_speed_;
+            ++transfer_time_delay_;
+        }
         return 0;
     }
     else {
@@ -60,7 +76,10 @@ int SSD::Write(const FileOp &file_operation) {
 
 int SSD::Read(const FileOp &file_operation) {
     if (contents_.find(file_operation.file_name) != contents_.end()) {
-        total_exec_time_ += (long double)file_operation.file_size / read_speed_;
+        if (!idle_signal_) {
+            total_exec_time_ += (long double)file_operation.file_size / read_speed_;
+            ++transfer_time_delay_;
+        }
         return 0;
     }
     // list error code
@@ -95,14 +114,19 @@ HDD::HDD(const BigUInt& r_speed, const BigUInt& w_speed, const BigUInt& c_size, 
     capacity_size_ = c_size;
     current_free_space_ = capacity_size_;
     seek_time_ = s_time;
+    idle_signal_ = false;
+    transfer_time_delay_ = 0;
 }
 
 int HDD::Write(const FileOp &file_operation) {
     //if (file_operation.file_size <= current_free_space_) {
         contents_[file_operation.file_name] = file_operation;
+    if (!idle_signal_) {
         total_exec_time_ += (long double)file_operation.file_size / write_speed_ + seek_time_ / 1000;
+        ++transfer_time_delay_;
+    }
         //current_free_space_ -= (long double)file_operation.file_size;
-        return 0;
+    return 0;
     //}
     /*else {
         cerr << "HDD write error." << endl;
@@ -113,7 +137,10 @@ int HDD::Write(const FileOp &file_operation) {
 
 int HDD::Read(const FileOp& file_operation) {
     if (contents_.find(file_operation.file_name) != contents_.end()) {
-        total_exec_time_ += (long double)file_operation.file_size / read_speed_ + seek_time_ / 1000;
+        if (!idle_signal_) {
+            total_exec_time_ += (long double)file_operation.file_size / read_speed_ + seek_time_ / 1000;
+            ++transfer_time_delay_;
+        }
         return 0;
     }
     // list error code

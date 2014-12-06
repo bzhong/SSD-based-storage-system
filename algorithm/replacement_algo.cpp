@@ -28,6 +28,10 @@ BigUInt ReplaceAlgo::GetHitCount() {
     return hit_count_;
 }
 
+BigUInt ReplaceAlgo::GetTransferTimeDelay() {
+    return hdd_->GetTransferTimeDelay();
+}
+
 FIFOAlgo::FIFOAlgo(const string& ssd_capacity,
          const string& ssd_read_speed,
          const string& ssd_write_speed,
@@ -467,10 +471,14 @@ void MQAAlgo::ExecFileOp(const FileOp &file_operation) {
         else {
             cur_threshold_ = basic_threshold_;
         }
+        ssd_->set_idle_signal(true);
+        hdd_->set_idle_signal(true);
         ExecReplace();
         if (ssd_->get_current_free_space() < ssd_->get_buffer_size()) {
             Replace(ssd_->get_buffer_size());
         }
+        ssd_->set_idle_signal(false);
+        hdd_->set_idle_signal(false);
     }
 }
 

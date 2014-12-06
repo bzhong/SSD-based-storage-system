@@ -12,6 +12,8 @@
 #include <cstdlib>
 #include <random>
 #include <chrono>
+#include <fstream>
+#include "replacement_algo.h"
 #include "tinyxml2.h"
 #include "op_structure.h"
 #include "replacement_algo.h"
@@ -19,6 +21,7 @@
 using namespace std;
 const int DEFAULT_FILE_IN_SET = 1;
 const BigUInt DEFAULT_FILE_SIZE = 1024 * 1024;
+const string DEFAULT_SSD_SIZE = "256GB";
 
 const BigUInt MINS_IN_HOUR = 60;
 const BigUInt MINS_IN_DAY = MINS_IN_HOUR * 24;
@@ -42,8 +45,8 @@ enum DistributeType
 struct CfgGlobal
 {
     BigUInt test_lenth;
-    int     workload;
-    CfgGlobal(): test_lenth(MINS_IN_YEAR), workload(DEFAULT_WORKLOAD) {};
+    string ssd_size;
+    CfgGlobal(): test_lenth(MINS_IN_YEAR), ssd_size(DEFAULT_SSD_SIZE) {};
 };
 
 struct CfgFileSet
@@ -76,6 +79,16 @@ struct CfgFileSet
     }
 };
 
+struct Statics
+{
+    BigUInt hit;
+    BigUInt req;
+    BigUInt time_delay;
+    BigUInt Algo;
+    BigUInt ssd;
+    BigUInt hdd;
+    Statics():hit(0),req(0),time_delay(0),Algo(0),ssd(0),hdd(0){};
+};
 
 
 class FileSet
@@ -143,7 +156,11 @@ public:
     void Configure(const CfgGlobal& cfg)
     {
         test_lenth = cfg.test_lenth;
-        workload = cfg.workload;
+        ssd_size = cfg.ssd_size;
+        
+        replace_algo[0] = new MQAAlgo((const string)ssd_size);
+        replace_algo[1] = new FIFOAlgo(ssd_size);
+        replace_algo[2] = new LRUAlgo(ssd_size);
     }
     
     void AddFileSet(const FileSet& fileset)
@@ -154,17 +171,19 @@ public:
     
 private:
     BigUInt test_lenth;
-    int     workload;
+    string ssd_size;
     
     
     BigUInt current;
-    int     idle_chance;
     vector<FileSet> setlist;
 
     ReplaceAlgo *replace_algo[3];
     
+    ofstream outf;
+    
     void IdleTrigger(void);
     void SendRequest(void);
+    void ProcStatics(void);
     
 };
 

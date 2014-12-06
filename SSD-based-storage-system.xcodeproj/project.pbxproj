@@ -273,14 +273,18 @@
 		C90A5A3F1A0E000100E0A8B5 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				OBJROOT = "$(SRCROOT)";
 				PRODUCT_NAME = "SSD-based-storage-system";
+				SYMROOT = "$(SRCROOT)";
 			};
 			name = Debug;
 		};
 		C90A5A401A0E000100E0A8B5 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				OBJROOT = "$(SRCROOT)";
 				PRODUCT_NAME = "SSD-based-storage-system";
+				SYMROOT = "$(SRCROOT)";
 			};
 			name = Release;
 		};
