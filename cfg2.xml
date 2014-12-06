@@ -1,0 +1,17 @@
+<InputGenerator>
+	<workload>80</workload>
+	<test_length>3M</test_length>
+
+	<FileSet id="1">
+		<filenum>200</filenum>
+		<minsize>1G</minsize>
+		<maxsize>4G</maxsize>
+		<distribute>Normal</distribute>
+		<writerate>0</writerate>
+		<singlerequest>10</singlerequest>
+		<frequency>1H</frequency>
+		<start>1M</start>
+		<length>1M</length>
+		<type>MKV</type>
+	</FileSet>
+</InputGenerator>
