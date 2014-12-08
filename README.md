@@ -9,7 +9,7 @@ Currently we provide only Mac version of code to quick start using Xcode. But st
 ### Steps to build
 
 1. Download all source code and unzip them to a directory. You can find the lastest version in https://github.com/bzhong/SSD-based-storage-system.
-2. Download Tinyxml2, a open source xml parser, through link https://github.com/leethomason/tinyxml2. Then copy tinyxml2.h and tinyxml2.cpp to common directory.
+2. Download Tinyxml2, a open source xml parser, through link https://github.com/leethomason/tinyxml2. Then copy tinyxml2.h and tinyxml2.cpp to input_generator directory.
 3. Compile and build using Xcode.
 
 ## Sample Input Files
