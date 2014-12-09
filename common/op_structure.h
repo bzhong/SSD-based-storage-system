@@ -55,7 +55,6 @@ struct FileOp {
     int op_type;
     BigUInt file_size;
     FileType file_type;
-    //string file_type;
     BigUInt access_time;
     FileOp(): file_name(""), op_type(-1), file_size(0), file_type(kOther), access_time(0) {}
 };

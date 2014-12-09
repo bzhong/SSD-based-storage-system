@@ -138,9 +138,6 @@ InputGenerator::InputGenerator() {
     replace_algo[2] = NULL;
     
     outf.open("result.txt");
-    //replace_algo[0] = new MQAAlgo("50GB");
-    //replace_algo[1] = new FIFOAlgo("50GB");
-    //replace_algo[2] = new LRUAlgo("50GB");
 }
 
 InputGenerator::~InputGenerator() {
@@ -155,12 +152,6 @@ InputGenerator::~InputGenerator() {
 
 void InputGenerator::SendRequest()
 {
-    /*cout<<"op_type:"<<gfileop.op_type<<"\t";
-    cout<<"name:"<<gfileop.file_name<<"\t";
-    cout<<"size:"<<gfileop.file_size<<"B\t";
-    cout<<"type:"<<gfileop.file_type<<"\t";
-    cout<<"access_time:"<<gfileop.access_time<<endl;*/
-    
     for (int count = 0; count < 3; ++count) {
         replace_algo[count]->ExecFileOp(gfileop);
     }
@@ -168,14 +159,10 @@ void InputGenerator::SendRequest()
 
 void InputGenerator::IdleTrigger(void)
 {
-//    if (idle_chance > 0 && rrand(0, 100) < idle_chance) {
-//        idle_chance -= 100;
     gfileop.op_type = kIdleOp;
     gfileop.access_time = current;
     SendRequest();
     return;
-//    }
-//    idle_chance += (100 - workload);
 }
 
 void InputGenerator::ProcStatics(void)

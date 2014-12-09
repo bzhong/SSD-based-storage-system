@@ -12,7 +12,6 @@
 using namespace std;
 
 int main() {
-    
     Driver dr;
     dr.RegisterFile("cfg.xml");
     dr.Run();

@@ -277,13 +277,6 @@ int MQAAlgo::AdjustByType(const FileOp &file_operation, const int& tier) {
     else if (file_operation.op_type > tier) {
         return tier + adjust_via_type_.at(file_operation.op_type);
     }
-    /*FileType file_type = file_type_map.at(file_operation.file_type);
-    if (file_type < tier) {
-        return tier - adjust_via_type.at(file_type);
-    }
-    else if (file_type > tier) {
-        return tier + adjust_via_type.at(file_type);
-    }*/
     return tier;
 }
 
@@ -429,7 +422,6 @@ void MQAAlgo::ExecFileOp(const FileOp &file_operation) {
             }
             while (file_operation.file_size > ssd_->get_current_free_space()) {
                 if (file_operation.file_size > ssd_->get_capacity_size()) {
-                    //cout << "file " << file_operation.file_name << " is too large to put in ssd. write to hdd." << endl;
                     end_time = clock();
                     total_exec_time_ += ((long double)(end_time - begin_time)) / CLOCKS_PER_SEC;
                     status = hdd_->Write(file_operation);
@@ -645,31 +637,3 @@ void LRUAlgo::ExecFileOp(const FileOp& file_operation) {
         return;
     }
 }
-
-/*ClockAlgo::ClockAlgo(const string& ssd_read_speed,
-          const string& ssd_write_speed,
-          const string& ssd_capacity,
-          const string& hdd_read_speed,
-          const string& hdd_write_speed,
-          const string& hdd_capacity,
-          const long double& hdd_seek_time) {
-    ssd_ = new SSD(TranslateSize(ssd_read_speed), TranslateSize(ssd_write_speed), TranslateSize(ssd_capacity));
-    hdd_ = new HDD(TranslateSize(hdd_read_speed), TranslateSize(hdd_write_speed), TranslateSize(hdd_capacity), hdd_seek_time);
-    total_exec_time_ = 0;
-    hit_count_ = req_count_ = 0;
-}
-
-ClockAlgo::~ClockAlgo() {
-    delete ssd_;
-    delete hdd_;
-    ssd_ = hdd_ = NULL;
-}
-
-void ClockAlgo::ExecFileOp(const FileOp& file_operation) {
-    
-}*/
-
-
-
-
-
