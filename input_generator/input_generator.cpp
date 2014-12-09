@@ -137,7 +137,7 @@ InputGenerator::InputGenerator() {
     replace_algo[1] = NULL;
     replace_algo[2] = NULL;
     
-    outf.open("../result.txt");
+    outf.open("result.txt");
     //replace_algo[0] = new MQAAlgo("50GB");
     //replace_algo[1] = new FIFOAlgo("50GB");
     //replace_algo[2] = new LRUAlgo("50GB");
