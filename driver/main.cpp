@@ -13,6 +13,9 @@ using namespace std;
 
 int main() {
     Driver dr;
-    dr.RegisterFile("cfg.xml");
+    string filename;
+    cout << "Please indicate the absolute path of configuration file you want to choose (e.g. /user/cfg.xml):" << endl;
+    cin >> filename;
+    dr.RegisterFile(filename);
     dr.Run();
 }

@@ -189,9 +189,9 @@ void InputGenerator::ProcStatics(void)
         cout.precision(3);
         cout << (long double)temp.hit / temp.req<<"\t";
         cout << temp.time_delay << "\t";
-        cout<<temp.Algo<<"\t";
-        cout<<temp.ssd<<"\t";
-        cout<<temp.hdd<<"\t";
+        cout<<temp.Algo<<"\t\t";
+        cout<<temp.ssd<<"\t\t";
+        cout<<temp.hdd<<"\t\t";
         
         outf.precision(3);
         outf << (long double)temp.hit / temp.req<<"\t";
@@ -204,6 +204,25 @@ void InputGenerator::ProcStatics(void)
 
 void InputGenerator::Run()
 {
+    cout << "Number" << "\t";
+    for (int i = 0; i < 3; ++i) {
+        cout << "HitRate" << "\t";
+        cout << "HDD_Req" << "\t";
+        switch (i) {
+            case 0:
+                cout << "MQA_time" << "\t";
+                break;
+            case 1:
+                cout << "FIFO_time" << "\t";
+                break;
+            case 2:
+                cout << "LRU_time" << "\t";
+                break;
+        }
+        cout << "SSD_time" << "\t";
+        cout << "HDD_time" << "\t";
+    }
+    cout << endl;
     
     for (current = 0; current < test_lenth; current++)
     {
@@ -225,7 +244,7 @@ void InputGenerator::Run()
             setlist[i].GetNextTrigger();
         }
         if (((current + 1) % MINS_IN_MONTH) == 0) {
-            cout<<(current + 1)/MINS_IN_MONTH<<"\t";
+            cout<<(current + 1)/MINS_IN_MONTH<<"\t\t";
             outf<<(current + 1)/MINS_IN_MONTH<<"\t";
             ProcStatics();
             cout<<endl;
