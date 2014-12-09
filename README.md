@@ -4,7 +4,7 @@ This project gives an innovative replacement algorithm for SSD-based hybrid stor
 
 ## How to build and run
 
-Currently we provide only Mac version of code to quick start using Xcode. But still we provide all source code that you can use to build and run in Linux or Windows. The only cons is there is no configuration file and Makefile :(. Soon later we will provide such compile options.
+We provide both Linux and Mac version of code to quick start. You can use Makefile in root directory to build and run or you can load xcode project file to run it.
 
 ### Steps to build
 
